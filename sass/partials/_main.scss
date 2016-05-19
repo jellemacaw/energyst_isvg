@@ -1,0 +1,29 @@
+body {
+	font-size:14px;
+	font-family: Helvetica, Myriad Pro, Verdana, Arial;
+}
+svg {
+	position:relative;
+	display:block;
+}
+
+#center_txt_fill {
+	width: 162px;
+	height: 79px;
+	line-height: 1;
+	text-align: center;
+	font-size: 1.1rem;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding:10px 12px;
+	letter-spacing: -0.5;
+
+	> span{
+		&:not(.default) {
+			display: none;
+		}
+		&.visible {
+			display: block;
+		}
+	}
+}
