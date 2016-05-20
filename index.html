@@ -1,9 +1,6 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="css/svg.css" />
-				<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
-    </head>
-    <body>
+
+                <link rel="stylesheet" href="https://macaw.sharepoint.com/sites/miriam_dev/energysttest/Shared Documents/svg.css" />
+			
         <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1488.1875 1052.3625" height="1052.3625" width="1488.1875" xml:space="preserve" version="1.1" id="svg2">
         <metadata id="metadata8">
             <rdf:RDF>
@@ -827,9 +824,9 @@
         </g>
 				<foreignobject x="665" y="494" id="center_txt_fill">
 			    <body xmlns="http://www.w3.org/1999/xhtml">
-			      <span class="group-default">Real energy is at the heart of all we do</span>
-			      <span class="group-improve_efficiency">improve efficiency</span>
-			      <span class="group-improve_volume">improve volume</span>
+			      <span class="group-default" id="default">Real energy is at the heart of all we do</span>
+			      <span class="group-improve_efficiency" id="improve_efficiency">improve efficiency</span>
+			      <span class="group-improve_volume" id="improve_volume">improve volume</span>
 			      <span class="group-resource_development">resource development</span>
 			      <span class="group-knowledge">knowledge</span>
 			      <span class="group-core_processes">core processes</span>
@@ -839,11 +836,72 @@
 			    </body>
 			  </foreignobject>
         </svg>
+        
+        	<script type="text/javascript" src="https://macaw.sharepoint.com/sites/miriam_dev/energysttest/Shared Documents/jquery-1.12.3.min.js"></script>
 
 				<script>
 				jQuery( document ).ready(function(){
 					var j = jQuery;
 					var group = "g[id^='group-']";
+                    var urlHoover = "/sites/miriam_dev/energysttest/_api/web/lists/GetByTitle('Energyst Test list')/items?$select=Title,HooverText";
+                    var urlDescription = "/sites/miriam_dev/energysttest/_api/web/lists/GetByTitle('Energyst Test list')/items?$select=Title,Description"
+
+                    //method to update text
+                    function UpdateText(svgDoc, textId, textValue) {
+                        jQuery("#" + textId, svgDoc).text(textValue);
+	                    }
+                        
+                     // get text for description pop-up
+                     function getDescription(url, id){
+                         var description = "";
+                         id = id.replace("group-","");
+                         
+                         jQuery.ajax({
+                            url: url,
+                            type: "GET",
+                            async:false, 
+                            headers: { "Accept": "application/json;odata=verbose" },
+                            success: function (data) {
+                                
+                                jQuery.each(data.d.results, function (index, value) {
+                                    if(id == value.Title){
+                                        description = value.Description;
+                                    }                             
+                                });
+                            },
+                            error: function (data) {
+                                //output error HERE
+                                console.log(data);
+                            }
+                        });
+                        
+                        return description;
+                     }
+                     
+                    //metod for REST GET request to retrieve text
+                    function getHoover(url) {
+
+                        jQuery.ajax({
+                            url: url,
+                            type: "GET",
+                            headers: { "Accept": "application/json;odata=verbose" },
+                            success: function (data) {
+                                
+                                var svgObject = jQuery("#center_txt_fill");
+                                var svgDoc = svgObject.contentDocument;
+
+                                jQuery.each(data.d.results, function (index, value) {
+                                    UpdateText(svgDoc, value.Title, value.HooverText);
+                                    
+                                    
+                                });
+                            },
+                            error: function (data) {
+                                //output error HERE
+                                console.log(data);
+                            }
+                        });
+                    }
 
 					//Icons hover
 					j('.icon').hover(function(){
@@ -857,7 +915,8 @@
 					//Match id to class and show txt
 					j(group).hover(function(){
 						var targetClass = "span." + this.id;
-						if("g[id^='group-']:hover") {
+						if ("g[id^='group-']:hover") {
+                            getHoover(urlHoover);
 							j('#center_txt_fill').find('.group-default').toggleClass('hidden');
 							j('#center_txt_fill').find(targetClass).toggleClass('visible');
 						}
@@ -876,15 +935,34 @@
 					];
 
 					j(group).on('click', function(){
-						urlLocationHandler(this.id)
+                        
+                        urlLocationHandler(this.id)
+                        
 					});
 
 					var urlLocationHandler = function(groupId){
-						var result = j.grep(urlData, function(e){ return e.id === groupId; });
-						window.open(result[0].url);
+						var result = j.grep(urlData, function(e){ return e.id === groupId; });   
+                      
+                      //get description text
+                        var description = getDescription(urlDescription, groupId);
+                        
+                        //make html element from description text
+                        var descriptionElement = $(description);
+                                          
+                        //set options for ModalDialog       
+                        var options = { 
+                        html: descriptionElement[0], 
+                        autoSize:true, 
+
+                        allowMaximize:true, 
+
+                        showClose: true, 
+                        }; 
+                        
+                        //show Modal Dialog
+						SP.UI.ModalDialog.showModalDialog(options);
 					};
 
 				});
 			</script>
-    </body>
-</html>
+
