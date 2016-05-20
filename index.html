@@ -843,8 +843,9 @@
 				<script>
 				jQuery( document ).ready(function(){
 					var j = jQuery;
+					var group = "g[id^='group-']";
 
-					//ICON HOVER
+					//Icons hover
 					j('.icon').hover(function(){
 						j(this).addClass('hover');
 					}, function(){
@@ -854,13 +855,35 @@
 					});
 
 					//Match id to class and show txt
-					j("g[id^='group-']").hover(function(){
+					j(group).hover(function(){
 						var targetClass = "span." + this.id;
 						if("g[id^='group-']:hover") {
 							j('#center_txt_fill').find('.group-default').toggleClass('hidden');
 							j('#center_txt_fill').find(targetClass).toggleClass('visible');
 						}
-					})
+					});
+
+					//Go to url when group is clicked
+					var urlData = [
+						{id:"group-improve_efficiency", url:"#!url"},
+						{id:"group-improve_volume", url:"#!url"},
+						{id:"group-resource_development", url:"#!url"},
+						{id:"group-knowledge", url:"#!url"},
+						{id:"group-core_processes", url:"#!url"},
+						{id:"group-supporting_processes", url:"#!url"},
+						{id:"group-value_proposition", url:"#!url"},
+						{id:"group-customer_intimacy", url:"#!url"}
+					];
+
+					j(group).on('click', function(){
+						urlLocationHandler(this.id)
+					});
+
+					var urlLocationHandler = function(groupId){
+						var result = j.grep(urlData, function(e){ return e.id === groupId; });
+						window.open(result[0].url);
+					};
+
 				});
 			</script>
     </body>
