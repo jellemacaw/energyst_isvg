@@ -7,6 +7,12 @@ svg {
 	display:block;
 }
 
+.center-txt-group {
+	fill: $black;
+	color:block;
+	font-size: 5rem
+}
+
 #center_txt_fill {
 	width: 162px;
 	height: 79px;
@@ -19,7 +25,8 @@ svg {
 	letter-spacing: -0.5;
 
 	> span{
-		&:not(.default) {
+		&:not(.group-default),
+		&.hidden {
 			display: none;
 		}
 		&.visible {
