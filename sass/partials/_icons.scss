@@ -1,8 +1,8 @@
 @import 'tools/colors';
 
-.icon{
-	transition: 100ms all ease;
+$animationTime: 150ms;
 
+.icon {
 	width: 50px;
 	height: 50px;
 
@@ -13,24 +13,23 @@
 	transform: rotate(0deg) scale(100%);
 }
 
-.icon:hover{
-	animation: dash 150ms linear forwards;
+.icon {
+	&.hover {
+		animation: dash $animationTime linear forwards;
 
-	@keyframes dash {
-		from {
-			fill: $black;
-			transform: rotate(0deg) scale(100%);
-		}
-		to {
-			fill: $white;
-			transform: rotate(5deg) scale(1.1);
+		@keyframes dash {
+			from {
+				fill: $black;
+				transform: rotate(0deg) scale(100%);
+			}
+			to {
+				fill: $white;
+				transform: rotate(5deg) scale(1.1);
+			}
 		}
 	}
-}
-
-
-.center-txt-group {
-	fill: $black;
-	color:block;
-	font-size: 5rem
+	&.default {
+		transform-origin: 0% 0%;
+		transform: rotate(0deg) scale(100%);
+	}
 }
