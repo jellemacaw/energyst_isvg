@@ -24,7 +24,8 @@ svg {
 	padding:10px 12px;
 	letter-spacing: -0.5;
 
-	> span{
+	> span,
+	> tspan {
 		&:not(.group-default),
 		&.hidden {
 			display: none;

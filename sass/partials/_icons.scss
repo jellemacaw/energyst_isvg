@@ -20,11 +20,9 @@ $animationTime: 150ms;
 		@keyframes dash {
 			from {
 				fill: $black;
-				transform: rotate(0deg) scale(100%);
 			}
 			to {
 				fill: $white;
-				transform: rotate(5deg) scale(1.1);
 			}
 		}
 	}
