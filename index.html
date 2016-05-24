@@ -827,12 +827,12 @@
 			      <span class="group-default" id="default">Real energy is at the heart of all we do</span>
 			      <span class="group-improve_efficiency" id="improve_efficiency">improve efficiency</span>
 			      <span class="group-improve_volume" id="improve_volume">improve volume</span>
-			      <span class="group-resource_development">resource development</span>
-			      <span class="group-knowledge">knowledge</span>
-			      <span class="group-core_processes">core processes</span>
-			      <span class="group-supporting_processes">supporting processes</span>
-			      <span class="group-value_proposition">value proposition</span>
-			      <span class="group-customer_intimacy">customer intimacy</span>
+			      <span class="group-resource_development" id="resource_development">resource development</span>
+			      <span class="group-knowledge" id="knowledge">knowledge</span>
+			      <span class="group-core_processes" id="core_processes">core processes</span>
+			      <span class="group-supporting_processes"" id="supporting_processes">supporting processes</span>
+			      <span class="group-value_proposition" id="value_proposition">value proposition</span>
+			      <span class="group-customer_intimacy" id="customer_intimacy">customer intimacy</span>
 			    </body>
 			  </foreignobject>
         </svg>
@@ -843,8 +843,8 @@
 				jQuery( document ).ready(function(){
 					var j = jQuery;
 					var group = "g[id^='group-']";
-                    var urlHoover = "/sites/miriam_dev/energysttest/_api/web/lists/GetByTitle('Energyst Test list')/items?$select=Title,HooverText";
-                    var urlDescription = "/sites/miriam_dev/energysttest/_api/web/lists/GetByTitle('Energyst Test list')/items?$select=Title,Description"
+                    var urlHoover = "/es/_api/web/lists/GetByTitle('figuretext')/items?$select=Title,center";
+                    var urlDescription = "/es/_api/web/lists/GetByTitle('figuretext')/items?$select=Title,popup"
 
                     //method to update text
                     function UpdateText(svgDoc, textId, textValue) {
@@ -865,12 +865,12 @@
                                 
                                 jQuery.each(data.d.results, function (index, value) {
                                     if(id == value.Title){
-                                        description = value.Description;
+                                        description = value.popup;
                                     }                             
                                 });
                             },
                             error: function (data) {
-                                //output error HERE
+                                //output error 
                                 console.log(data);
                             }
                         });
@@ -891,13 +891,13 @@
                                 var svgDoc = svgObject.contentDocument;
 
                                 jQuery.each(data.d.results, function (index, value) {
-                                    UpdateText(svgDoc, value.Title, value.HooverText);
+                                    UpdateText(svgDoc, value.Title, value.center);
                                     
                                     
                                 });
                             },
                             error: function (data) {
-                                //output error HERE
+                                //output error 
                                 console.log(data);
                             }
                         });
