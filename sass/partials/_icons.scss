@@ -7,10 +7,12 @@ $animationTime: 150ms;
 	height: 50px;
 
 	fill: $black;
+    stroke:$black;
+
 	opacity: 1;
 
 	transform-origin: 0% 0%;
-	transform: rotate(0deg) scale(100%);
+	transform: rotate(0deg) scale(1);
 }
 
 .icon {
@@ -20,14 +22,21 @@ $animationTime: 150ms;
 		@keyframes dash {
 			from {
 				fill: $black;
+                stroke:$black;
+                transform:scale(1) translate(0, 0);
 			}
 			to {
 				fill: $white;
+                stroke:$white;
+                transform:scale(1.2) translate(-5%,-5%);
 			}
 		}
+        /*transform:scale(1.2) translate(-5%,-5%);
+        fill:$white;
+        stroke:$white;*/
 	}
 	&.default {
 		transform-origin: 0% 0%;
-		transform: rotate(0deg) scale(100%);
+		transform: rotate(0deg) scale(1);
 	}
 }
