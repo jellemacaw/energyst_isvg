@@ -2087,7 +2087,7 @@
                     </body>
                 </foreignobject>
 
-                <text x="400" y="381" id="center_txt_fill">
+                <text x="400" y="381" id="center_txt_fill2">
                       <tspan class="group-default">Real energy is at the heart of all we do</tspan>
                       <tspan class="group-improve_efficiency">improve efficiency</tspan>
                       <tspan class="group-improve_volume">improve volume</tspan>
@@ -2119,7 +2119,14 @@
                     j(group).hover(function(){
                         var targetClass = this.attributes["data-group"].value;
                         j('#center_txt_fill').find('.group-default').toggleClass('hidden');
-                        j('#center_txt_fill').find("."+ targetClass).toggleClass('visible');
+                        j('#center_txt_fill').find("." + targetClass).toggleClass('visible');
+
+                        var ua = window.navigator.userAgent;
+                        if (ua.indexOf("Trident/") || ua.indexOf("MSIE ")) {
+                            j('#center_txt_fill2 tspan').toggleClass('hidden');
+                            j('#center_txt_fill2').find("." + targetClass).toggleClass('visible');
+                        }
+
                         j("g[data-group='" + targetClass + "']").toggleClass("hover");
                     });
 
