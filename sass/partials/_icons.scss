@@ -20,23 +20,105 @@ $animationTime: 150ms;
 		animation: dash $animationTime linear forwards;
 
 		@keyframes dash {
-			from {
+			0% {
 				fill: $black;
                 stroke:$black;
                 transform:scale(1) translate(0, 0);
 			}
-			to {
+			100% {
 				fill: $white;
                 stroke:$white;
                 transform:scale(1.2) translate(-5%,-5%);
 			}
 		}
-        /*transform:scale(1.2) translate(-5%,-5%);
-        fill:$white;
-        stroke:$white;*/
 	}
 	&.default {
 		transform-origin: 0% 0%;
 		transform: rotate(0deg) scale(1);
+	}
+}
+
+.icons-wrapper {
+	$iconwrapper: 547px;
+	$iconsize: 100px;
+
+	position: absolute;
+    top: 152px;
+    left: 213px;
+
+	width: $iconwrapper;
+	height: $iconwrapper;
+	display: block;
+
+	.icons {
+		width: $iconsize;
+		height: $iconsize;
+		position: absolute;
+		cursor: pointer;
+		
+		img{
+			transform:scale(0.65) rotate(0deg);
+			transform-origin: 25% 25%;
+		}
+		
+		&:hover {
+			animation: dash $animationTime linear forwards;
+			
+
+			@keyframes grow {
+				0% {
+					img{
+						transform:scale(0.65) rotate(0deg);
+					}
+					
+				}
+				100% {
+					img{
+						transform:scale(0.75) rotate(7deg);
+					}
+				}
+			}
+		}
+	}
+
+	.icon-1 {
+		top:41px;
+		left: 145px;
+	}
+	.icon-2 {
+		top:133px;
+		left: 68px;
+
+	}
+
+	.icon-3 {
+		top:332px;
+		left: 58px;
+
+	}
+	.icon-4 {
+		top:416px;
+		left: 151px;
+
+	}
+	.icon-5 {
+		top:416px;
+		left: 316px;
+
+	}
+	.icon-6 {
+		top:310px;
+		left: 415px;
+
+	}
+	.icon-7 {
+		top:136px;
+		left: 413px;
+
+	}
+	.icon-8 {
+		top:37px;
+		left: 317px;
+
 	}
 }
