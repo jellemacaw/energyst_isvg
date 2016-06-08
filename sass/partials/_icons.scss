@@ -1,6 +1,7 @@
 @import 'tools/colors';
 
 $animationTime: 150ms;
+$opacityTime: 350ms;
 
 .icon {
 	width: 50px;
@@ -17,7 +18,7 @@ $animationTime: 150ms;
 
 .icon {
 	&.hover {
-		animation: dash $animationTime linear forwards;
+		animation: dash $animationTime ease-in-out forwards;
 
 		@keyframes dash {
 			0% {
@@ -50,27 +51,97 @@ $animationTime: 150ms;
 	height: $iconwrapper;
 	display: block;
 
+	.group-1 {
+		position: absolute;
+		left: -26px;
+		top: 10px;
+		width: 108px;
+		height: 30px;
+		transform: rotateZ(138deg);
+
+		&:hover {
+			& ~ .icon-1 {
+				animation: dash $animationTime linear forwards;
+			}
+			& ~ .icon-2  {
+				animation: dash $animationTime linear forwards;
+			}
+		}
+	}
+	.group-2 {
+		position: absolute;
+		left: -34px;
+    bottom: 6px;
+		width: 108px;
+		height: 30px;
+		background-color: transparant;
+		transform: rotateZ(42deg);
+
+		&:hover {
+			& ~ .icon-3 {
+				animation: dash $animationTime linear forwards;
+			}
+			& ~ .icon-4  {
+				animation: dash $animationTime linear forwards;
+			}
+		}
+	}
+	.group-3 {
+		position: absolute;
+		right: -34px;
+    bottom: 6px;
+		width: 108px;
+		height: 30px;
+		transform: rotateZ(132deg);
+
+		&:hover {
+			& ~ .icon-5 {
+				animation: dash $animationTime linear forwards;
+			}
+			& ~ .icon-6 {
+				animation: dash $animationTime linear forwards;
+			}
+		}
+	}
+	.group-4 {
+		position: absolute;
+		right: -34px;
+    top: 10px;
+		width: 108px;
+		height: 30px;
+		transform: rotateZ(42deg);
+
+		&:hover {
+			& ~ .icon-7 {
+				animation: dash $animationTime linear forwards;
+			}
+			& ~ .icon-8  {
+				animation: dash $animationTime linear forwards;
+			}
+		}
+	}
+
 	.icons {
 		width: $iconsize;
 		height: $iconsize;
 		position: absolute;
 		cursor: pointer;
-		
+
 		img{
 			transform:scale(0.65) rotate(0deg);
 			transform-origin: 25% 25%;
 		}
-		
+
 		&:hover {
 			animation: dash $animationTime linear forwards;
-			
+
 
 			@keyframes grow {
 				0% {
 					img{
 						transform:scale(0.65) rotate(0deg);
 					}
-					
+
 				}
 				100% {
 					img{
