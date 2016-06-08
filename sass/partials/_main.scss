@@ -34,15 +34,6 @@ svg {
 		}
 		&.visible {
 			display: block;
-			animation: opacity $opacityTime linear forwards;
-			@keyframes opacity {
-				0% {
-					opacity: 0;
-				}
-				100% {
-					opacity: 1;
-				}
-			}
 		}
 	}
 }
